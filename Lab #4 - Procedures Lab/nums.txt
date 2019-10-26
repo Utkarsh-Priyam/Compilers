@@ -1,0 +1,21 @@
+PROCEDURE printSquare(n);
+BEGIN
+    printSquare := n * n;
+    x := printSquare;
+    WRITELN(printSquare);
+END;
+
+PROCEDURE printSquare(a, b);
+BEGIN
+    WRITELN(a * a);
+    WRITELN(b * b);
+END;
+
+BEGIN
+    x := 1;
+    test := printSquare(x + 2);
+    printSquare(x + 3, x + 4);
+    WRITELN(test);
+    WRITELN(x);
+END;
+.
