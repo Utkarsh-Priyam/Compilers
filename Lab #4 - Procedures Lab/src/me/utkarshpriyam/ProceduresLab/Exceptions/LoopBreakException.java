@@ -1,31 +1,32 @@
 package me.utkarshpriyam.ProceduresLab.Exceptions;
 
 /**
- * ScanErrorException is a subclass of the RuntimeException.
- * This exception is thrown whenever the scanner has an error of any kind.
+ * LoopBreakException is a subclass of the RuntimeException.
+ * This exception is thrown whenever the interpreter has to exit
+ * (break) from the innermost running loop.
  *
  * @author  Utkarsh Priyam
  * TODO add version tag
  */
-public class ScanErrorException extends RuntimeException
+public class LoopBreakException extends RuntimeException
 {
     /**
-     * Constructs a new scan error exception with {@code null} as its
+     * Constructs a new loop break exception with {@code null} as its
      * detail message. The cause is not initialized.
      */
-    public ScanErrorException()
+    public LoopBreakException()
     {
         super();
     }
 
     /**
-     * Constructs a new scan error exception with the specified detail message.
+     * Constructs a new loop break exception with the specified detail message.
      * The cause is not initialized.
      *
      * @param message   the detail message. The detail message is saved for
      *                  later retrieval by the getMessage() method.
      */
-    public ScanErrorException(String message)
+    public LoopBreakException(String message)
     {
         super(message);
     }

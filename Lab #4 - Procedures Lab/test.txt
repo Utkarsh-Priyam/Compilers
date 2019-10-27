@@ -1,0 +1,78 @@
+PROCEDURE add(a,b);
+BEGIN
+    add := a + b;
+END;
+
+PROCEDURE subtract(a, b);
+BEGIN
+    subtract := a - b;
+END;
+
+PROCEDURE multiply(a, b);
+BEGIN
+    multiply := a * b;
+END;
+
+PROCEDURE divide(a, b);
+BEGIN
+    divide := a / b;
+END;
+
+PROCEDURE pow(a, n);
+BEGIN
+    IF n = 0 THEN
+        pow := 1;
+    ELSE
+    IF n < 0 THEN
+        pow := 0;
+    ELSE
+        pow := a * pow(a, n-1);
+END;
+
+PROCEDURE abs(n);
+    IF n < 0 THEN
+        abs := -n;
+    ELSE
+        abs := n;
+
+PROCEDURE random(it);
+    random := random(97, it);
+
+PROCEDURE random(seed, it);
+BEGIN
+    mod := 10093;
+    seed := mod(seed, mod);
+    IF it <= 0 THEN
+    BEGIN
+        random := seed;
+        EXIT;
+    END;
+    product := 1;
+    FOR count := 1 TO it DO
+        product := mod(product * seed, mod);
+    random := product;
+END;
+
+PROCEDURE sgn(n);
+BEGIN
+    IF n < 0 THEN
+        sgn := -1;
+    ELSE IF n > 0 THEN
+        sgn := 1;
+    ELSE
+        sgn := 0;
+END;
+
+PROCEDURE mod(n, m);
+BEGIN
+    posN := abs(n);
+    WHILE posN >= m DO
+        posN := posN - m;
+    mod := posN * sgn(n);
+END;
+
+BEGIN
+    FOR i := 1 TO 50 DO
+        WRITELN(random(i));
+END;
+.

@@ -57,18 +57,19 @@ public class Environment
 
     public void setProcedure(String procName, List<String> parameters, Statement exec)
     {
-        if (parent != null)
-        {
-            parent.setProcedure(procName, parameters, exec);
-            return;
-        }
-        procedureMap.putIfAbsent(procName, new HashMap<>());
-        procedureMap.get(procName).put(parameters.size(), new Pair<>(parameters,exec));
+        Environment global = this;
+        while (global.parent != null)
+            global = global.parent;
+
+        global.procedureMap.putIfAbsent(procName, new HashMap<>());
+        global.procedureMap.get(procName).put(parameters.size(), new Pair<>(parameters,exec));
     }
     public Pair<List<String>, Statement> getProcedure(String procName, int argumentsLength)
     {
-        if (parent != null)
-            return parent.getProcedure(procName, argumentsLength);
-        return procedureMap.get(procName).get(argumentsLength);
+        Environment global = this;
+        while (global.parent != null)
+            global = global.parent;
+
+        return global.procedureMap.get(procName).get(argumentsLength);
     }
 }

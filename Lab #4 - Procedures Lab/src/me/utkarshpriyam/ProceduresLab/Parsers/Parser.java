@@ -135,9 +135,9 @@ public class Parser
                 String varName = currentToken;
                 eat(currentToken);
                 eat(":=");
-                Expression start = parseInteger();
+                Expression start = parseExpression();
                 eat("TO");
-                Expression end = parseInteger();
+                Expression end = parseExpression();
                 eat("DO");
 
                 // count = start
@@ -150,6 +150,24 @@ public class Parser
                 // For loop
                 Statement then = parseStatement();
                 return new For(pre, cond, change, then);
+            }
+            case "EXIT":
+            {
+                eat("EXIT");
+                eat(";");
+                return new Exit();
+            }
+            case "BREAK":
+            {
+                eat("BREAK");
+                eat(";");
+                return new Break();
+            }
+            case "CONTINUE":
+            {
+                eat("CONTINUE");
+                eat(";");
+                return new Continue();
             }
             default:
             {

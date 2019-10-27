@@ -1,6 +1,8 @@
 package me.utkarshpriyam.ProceduresLab.AST;
 
 import me.utkarshpriyam.ProceduresLab.Environments.Environment;
+import me.utkarshpriyam.ProceduresLab.Exceptions.LoopBreakException;
+import me.utkarshpriyam.ProceduresLab.Exceptions.LoopContinueException;
 
 public class For extends Statement
 {
@@ -21,7 +23,19 @@ public class For extends Statement
         pre.exec(env);
         while (cond.eval(env))
         {
-            then.exec(env);
+            try
+            {
+                then.exec(env);
+            }
+            catch (LoopBreakException breakLoop)
+            {
+                break;
+            }
+            catch (LoopContinueException loopContinue)
+            {
+                change.exec(env);
+                continue;
+            }
             change.exec(env);
         }
     }

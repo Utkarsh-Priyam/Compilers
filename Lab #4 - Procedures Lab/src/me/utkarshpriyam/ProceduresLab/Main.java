@@ -9,7 +9,7 @@ public class Main
 {
     public static void main(String[] args) throws IOException
     {
-        FileInputStream fileInputStream = new FileInputStream(new File("nums.txt"));
+        FileInputStream fileInputStream = new FileInputStream(new File("test.txt"));
 //        Scanner scanner = new Scanner(fileInputStream);
         Parser parser = new Parser(new Scanner(fileInputStream));
         Environment environment = new Environment();

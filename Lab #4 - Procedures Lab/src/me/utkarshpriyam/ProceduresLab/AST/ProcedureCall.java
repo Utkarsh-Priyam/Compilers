@@ -2,6 +2,7 @@ package me.utkarshpriyam.ProceduresLab.AST;
 
 import javafx.util.Pair;
 import me.utkarshpriyam.ProceduresLab.Environments.Environment;
+import me.utkarshpriyam.ProceduresLab.Exceptions.ProcedureExitException;
 
 import java.util.List;
 
@@ -30,7 +31,11 @@ public class ProcedureCall extends Expression
         for (int index = 0; index < arguments.size(); index++)
             local.declareVariable(procedureParameters.get(index), arguments.get(index).eval(env));
         // Run statement
-        procedure.getValue().exec(local);
+        try
+        {
+            procedure.getValue().exec(local);
+        }
+        catch (ProcedureExitException ignored) {}
         return local.getVariable(id);
     }
 }
