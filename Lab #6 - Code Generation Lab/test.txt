@@ -1,0 +1,11 @@
+VAR count;
+
+BEGIN
+    count := 1;
+    WHILE count <= 15 DO
+    BEGIN
+        WRITELN(count);
+        count := count + 1;
+    END;
+END;
+.
