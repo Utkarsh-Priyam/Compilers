@@ -1,11 +1,12 @@
 VAR count;
 
 BEGIN
-    count := 1;
-    WHILE count <= 15 DO
+
+    FOR count := 1 TO 15 DO
     BEGIN
+        IF count = 10 THEN
+            CONTINUE;
         WRITELN(count);
-        count := count + 1;
     END;
 END;
 .

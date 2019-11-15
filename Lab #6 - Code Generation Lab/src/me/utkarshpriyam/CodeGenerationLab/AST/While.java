@@ -29,7 +29,7 @@ public class While extends Statement
             {
                 break;
             }
-            catch (LoopContinueException loopContinue)
+            catch (LoopContinueException continueLoop)
             {
                 continue;
             }
@@ -37,14 +37,14 @@ public class While extends Statement
     }
 
     @Override
-    public void compile(Emitter e)
+    public void compile(Emitter e, String loopStartLabel, String loopEndLabel, String procedureEndLabel)
     {
         int labelNum = e.nextLabelID();
         String startLabel = "startwhile" + labelNum;
         String endLabel = "endwhile" + labelNum;
         e.emit(startLabel + ":");
         cond.compile(e, endLabel);
-        then.compile(e);
+        then.compile(e, startLabel, endLabel, procedureEndLabel);
         e.emit("j " + startLabel);
         e.emit(endLabel + ":");
     }

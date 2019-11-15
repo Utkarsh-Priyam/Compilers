@@ -14,17 +14,13 @@ public class Parser
     private Scanner scanner;
     private String currentToken;
 
-    private Map<String,Integer> vars;
-
     public Parser(Scanner scanner)
     {
         this.scanner = scanner;
         currentToken = scanner.nextToken();
-
-        vars = new HashMap<>();
     }
 
-    public void eat(String currentTokenCheck)
+    private void eat(String currentTokenCheck)
     {
         if (currentToken.equals(currentTokenCheck))
             currentToken = scanner.nextToken();
@@ -43,7 +39,7 @@ public class Parser
     public Program parseProgram()
     {
         List<String> variables = new LinkedList<>();
-        if (currentToken.equals("VAR"))
+        while (currentToken.equals("VAR"))
         {
             eat("VAR");
             variables.add(currentToken);

@@ -21,7 +21,7 @@ public class Assignment extends Statement
     }
 
     @Override
-    public void compile(Emitter e)
+    public void compile(Emitter e, String loopStartLabel, String loopEndLabel, String procedureEndLabel)
     {
         exp.compile(e);
         e.emit("la $t0 var" + name);

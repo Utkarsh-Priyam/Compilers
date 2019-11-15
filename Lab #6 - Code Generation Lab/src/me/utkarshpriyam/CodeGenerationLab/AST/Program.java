@@ -29,18 +29,6 @@ public class Program
     {
         Emitter e = new Emitter(outputFileName);
 
-        // Header
-        e.emit(".text");
-        e.emit(".globl main");
-        e.newLine();
-
-        // Actual Code
-        e.emit("main:");
-        statement.compile(e);
-        e.emit("li $v0 10");
-        e.emit("syscall");
-        e.newLine();
-
         // .data Section
         e.emit(".data");
 
@@ -53,5 +41,17 @@ public class Program
         e.emit("# Global Variables");
         for (String variableName: variables)
             e.emit("var" + variableName + ": .word 0");
+
+        // Header
+        e.emit(".text");
+        e.emit(".globl main");
+        e.newLine();
+
+        // Actual Code
+        e.emit("main:");
+        statement.compile(e, null, null, null);
+        e.emit("li $v0 10");
+        e.emit("syscall");
+        e.newLine();
     }
 }

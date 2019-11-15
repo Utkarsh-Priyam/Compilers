@@ -32,24 +32,24 @@ public class If extends Statement
     }
 
     @Override
-    public void compile(Emitter e)
+    public void compile(Emitter e, String loopStartLabel, String loopEndLabel, String procedureEndLabel)
     {
         int labelNum = e.nextLabelID();
         String endLabel = "endif" + labelNum;
         if (or == null)
         {
             cond.compile(e, endLabel);
-            then.compile(e);
+            then.compile(e, loopStartLabel, loopEndLabel, procedureEndLabel);
             e.emit(endLabel + ":");
         }
         else
         {
             String elseLabel = "startelse" + labelNum;
             cond.compile(e, elseLabel);
-            then.compile(e);
+            then.compile(e, loopStartLabel, loopEndLabel, procedureEndLabel);
             e.emit("j " + endLabel);
             e.emit(elseLabel + ":");
-            or.compile(e);
+            or.compile(e, loopStartLabel, loopEndLabel, procedureEndLabel);
             e.emit(endLabel + ":");
         }
     }

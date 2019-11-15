@@ -19,7 +19,7 @@ public class Writeln extends Statement
     }
 
     @Override
-    public void compile(Emitter e)
+    public void compile(Emitter e, String loopStartLabel, String loopEndLabel, String procedureEndLabel)
     {
         exp.compile(e);
         e.emit("move $a0 $v0");

@@ -22,9 +22,9 @@ public class Block extends Statement
     }
 
     @Override
-    public void compile(Emitter e)
+    public void compile(Emitter e, String loopStartLabel, String loopEndLabel, String procedureEndLabel)
     {
         for (Statement statement: statements)
-            statement.compile(e);
+            statement.compile(e, loopStartLabel, loopEndLabel, procedureEndLabel);
     }
 }
