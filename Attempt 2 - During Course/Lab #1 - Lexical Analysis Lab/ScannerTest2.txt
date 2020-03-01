@@ -1,0 +1,11 @@
++= -= *= /= *//* comments */ shouldn't print // more comments
+*/* multiline edge-case *// test //
+-//comment edge-case
+hyphen-word-behavior?
+
+= == ==/*=*/ <> := << >> .01 // ><
+// hi
+/= *//
+"literal" //
+  0 0 0 0 0  44. 4.43 4 r ++ -- %= // != ?=
+  /=.rdfsa
