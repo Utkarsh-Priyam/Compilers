@@ -1,0 +1,11 @@
+BEGIN
+    READLN(x);
+    READLN(y);
+
+    WRITELN(x ** y);
+
+    WRITELN(x & y);
+    WRITELN(x | y);
+    WRITELN(x ^ y);
+END;
+.
