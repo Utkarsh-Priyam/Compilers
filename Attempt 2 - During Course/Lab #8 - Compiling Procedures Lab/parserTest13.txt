@@ -1,0 +1,9 @@
+PROCEDURE countUp(count, max);
+    IF count <= max THEN
+    BEGIN
+        WRITELN(count);
+        countUp(count + 1, max);
+    END;
+
+countUp(2, 4);
+.

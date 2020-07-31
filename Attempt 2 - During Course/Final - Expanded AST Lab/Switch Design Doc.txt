@@ -1,0 +1,71 @@
+Modified Grammar:
+-----------------
+stmt → WRITELN(expr);|BEGIN stmts END;|id:=expr;|IF cond THEN stmt|WHILE cond DO stmt|FOR id:=expr TO expr DO stmt|SWITCH(expr) BEGIN cases_block END;|flowcntrl
+flowcntrl → BREAK;|CONTINUE;|EXIT;
+
+cases_block → cases_block caseblock | caseblock
+caseblock → cases stmt
+cases → cases case | case
+case → CASE expr: | DEFAULT:
+
+stmts → stmts stmt | ε
+expr → expr+term | expr-term | term
+term → term * factor | term / factor | factor
+factor →(expr)|-factor|num|id
+
+cond → expr relop expr
+relop → =|<>|<|>|<=|>=
+
+
+What changed/How it works:
+--------------------------
+I added both SWITCH statements and program flow controllers
+(in the form of BREAK, CONTINUE, and EXIT, which correspond to break, continue, and return, respectively).
+
+BREAK, CONTINUE, EXIT work like they do in Java:
+1) BREAK lets you skip all remaining loop iterations and exit out of SWITCH statements
+2) CONTINUE lets you skip the rest of the current loop iteration
+3) EXIT immediately exits you from the current method/procedure
+
+SWITCH is also handled similarly to how it is done in Java.
+The full syntax looks something like the following:
+
+SWITCH (expr)
+BEGIN
+    CASE expr: stmt
+
+    CASE expr: stmt
+
+    CASE expr:
+    CASE expr:
+    CASE expr: stmt
+
+    DEFAULT: stmt
+
+    DEFAULT:
+    case expr:
+    DEFAULT:
+    case expr: stmt
+END;
+
+First, the main expression is evaluated. Then every CASE is individually checked to see which ones are valid.
+If a CASE is true, then the statement associated with that CASE is run. Then, the SWITCH moves on to the next block of CASEs.
+Each block of CASEs is differentiated by its statement: Every block has 1 statement corresponding to it.
+
+The DEFAULT case is always true.
+
+Regardless of how many different CASEs in a block are true, the statement associated with the block only runs once.
+This can be seen in the example file in this CASE block.
+
+CASE 5:
+CASE 4:
+CASE 100:
+CASE 3:
+DEFAULT:
+CASE 2:
+CASE 1: WRITELN(5);
+
+Here, the evaluated expression had a value of 100, so both CASE 100: and DEFAULT: are true. However, the output only has 5 printed once.
+
+The test file is test.txt, and it tests both SWITCHes and the different flow controllers.
+The expected output is in the same file, below the program.

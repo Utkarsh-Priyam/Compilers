@@ -1,0 +1,28 @@
+PROCEDURE a(x, y);
+BEGIN
+	WRITELN(x);
+	WRITELN(y);
+	x := x + 2 * y;
+	y := 2 * x - 3 * y;
+	WRITELN(x);
+	WRITELN(y);
+	b();
+END;
+
+PROCEDURE b();
+BEGIN
+    WRITELN(x);
+    WRITELN(y);
+    w := 10;
+END;
+
+BEGIN
+	x := 5;
+	y := 3;
+	a(x, y);
+	WRITELN(w);
+END;
+.
+.
+.
+.
